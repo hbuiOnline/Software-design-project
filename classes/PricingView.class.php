@@ -1,6 +1,6 @@
 <?php
 
-class FuelQuoteView extends FuelQuote {
+class PricingView extends FuelQuote {
 
   public function fuelQuoteDataShow(){
     $result = array();
