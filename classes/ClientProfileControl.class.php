@@ -3,7 +3,6 @@
 class ClientProfileControl extends ClientProfile
 {
 
-  //Properties
   public function updateProfileInput($clientUserId, $clientName, $clientAddress1, $clientAddress2, $clientCity, $clientState, $clientZip)
   {
     if (!preg_match("/^([a-zA-Z]+([\ a-zA-Z.]+)*){1,50}$/", $clientName)) {
