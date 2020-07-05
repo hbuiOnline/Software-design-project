@@ -1,12 +1,5 @@
-node_modules/
-
-# Windows PHP files
-vendor/bin/phpunit
-phpunit.xml
-
-# MacOS file
-.DS_Store
-
-phpunit.xml
-
-/vendor/bin/phpunit
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
