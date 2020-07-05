@@ -11,17 +11,7 @@ if (isset($_POST['password-update'])) {
   $newPwd = $_POST['newpassword'];
   $confirmNewPwd = $_POST['newpassword-repeat'];
 
-  if (empty($currentPwd) || empty($newPwd) || empty($confirmNewPwd)) {
-    header("Location: ../passwordmanager.php?error=emptyfield");
-    exit();
-  }
-  elseif ($newPwd !== $confirmNewPwd) {
-    header("Location: ../passwordmanager.php?error=newpwdnotmatch");
-    exit();
-  }
-  else {
-    $userObj->usersPwdUpdateInput($userId, $currentPwd,$newPwd);
-  }
+  $userObj->usersPwdUpdateInput($userId, $currentPwd,$newPwd, $confirmNewPwd);
 
 }
 elseif (isset($_POST['createnewpwd'])) {
@@ -33,16 +23,7 @@ elseif (isset($_POST['createnewpwd'])) {
   $password = $_POST['newpwd'];
   $passwordRepeat = $_POST['confirm-newpwd'];
 
-  if(empty($password) || empty($passwordRepeat)){
-    header("Location: ../create-newpwd.php?newpwd=empty");
-    exit();
-  } elseif ($password != $passwordRepeat) {
-    header("Location: ../create-newpwd.php?newpwd=pwdnotsame");
-    exit();
-  }
-  else {
-    $userObj->userResetPwdInput($selector, $validator, $password);
-  }
+  $userObj->userResetPwdInput($selector, $validator, $password, $passwordRepeat);
 
 }
 else {

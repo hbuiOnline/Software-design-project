@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class ProfileManagerInputTest extends TestCase
+class ClientProfileControlTest extends TestCase
 {
 
     //For Name validation
@@ -30,6 +30,12 @@ class ProfileManagerInputTest extends TestCase
       $this->assertMatchesRegularExpression("/^([a-zA-Z]+([\ a-zA-Z.]+)*){1,50}$/", $clientName);
     } //End testProfileManagerNameInputWithNumber
 
+    public function testProfileManagerNameInputWithRepeatedLetter()
+    {
+      $clientName = 'HHHHHHHHHH BBBBBBBBBBB';
+      $this->assertMatchesRegularExpression("/^([a-zA-Z]+([\ a-zA-Z.]+)*){1,50}$/", $clientName);
+    } //End testProfileManagerNameInputWithRepeatedLetter
+
     public function testProfileManagerNameInputWithSymbol()
     {
       $clientName = 'Han Bui!';
@@ -42,12 +48,25 @@ class ProfileManagerInputTest extends TestCase
       $this->assertMatchesRegularExpression("/^([a-zA-Z]+([\ a-zA-Z.]+)*){1,50}$/", $clientName);
     } //End testProfileManagerNameInputWithCompanyNameOk
 
+    public function testProfileManagerNameInputWithLongCompanyName()
+    {
+      $clientName = 'ExxonMobileShellBritishPetroleumValeroConocoPhillips';
+      $this->assertMatchesRegularExpression("/^([a-zA-Z]+([\ a-zA-Z.]+)*){1,50}$/", $clientName);
+    } //End testProfileManagerNameInputWithLongCompanyName
+
+
 
     //-----------------------------------------------------------------------------//
     //For Address1 validation
     public function testProfileManagerAddress1InputOk()
     {
       $address = '6600 Otherside Blvd';
+      $this->assertMatchesRegularExpression("/^([0-9]+([\ a-zA-Z.]+)*){1,100}$/", $address);
+    } //End testProfileManagerAddress1Input
+
+    public function testProfileManagerAddress1InputWithoutStreetType()
+    {
+      $address = '1800 Othersideisnotagoodside';
       $this->assertMatchesRegularExpression("/^([0-9]+([\ a-zA-Z.]+)*){1,100}$/", $address);
     } //End testProfileManagerAddress1Input
 
@@ -69,6 +88,9 @@ class ProfileManagerInputTest extends TestCase
       $this->assertMatchesRegularExpression("/^([0-9]+([\ a-zA-Z.]+)*){1,100}$/", $address);
     } //End testProfileManagerAddress1InputWithSymbol
 
+
+
+
     //-----------------------------------------------------------------------------//
     //For Address2 validation
     public function testProfileManagerAddress2InputOk()
@@ -76,6 +98,18 @@ class ProfileManagerInputTest extends TestCase
       $address = '100';
       $this->assertMatchesRegularExpression("/^([0-9]+([\ a-zA-Z.]+)*){1,100}$/", $address);
     } //End testProfileManagerAddress2Input
+
+    public function testProfileManagerAddress2InputWith1Digit()
+    {
+      $address = '1';
+      $this->assertMatchesRegularExpression("/^([0-9]+([\ a-zA-Z.]+)*){1,100}$/", $address);
+    } //End testProfileManagerAddress2InputWith1Digit
+
+    public function testProfileManagerAddress2InputWithLargeDigit()
+    {
+      $address = '11002002';
+      $this->assertMatchesRegularExpression("/^([0-9]+([\ a-zA-Z.]+)*){1,100}$/", $address);
+    } //End testProfileManagerAddress2InputWithLargeDigit
 
     public function testProfileManagerAddress2InputWithLetter()
     {
@@ -98,6 +132,24 @@ class ProfileManagerInputTest extends TestCase
         $city = 'Houston';
         $this->assertMatchesRegularExpression("/^([a-zA-Z]+([\ a-zA-Z.]+)*){1,100}$/", $city);
     } //End testProfileManagerCityInputOk
+
+    public function testProfileManagerCityInputWithLowerCases()
+    {
+        $city = 'houston';
+        $this->assertMatchesRegularExpression("/^([a-zA-Z]+([\ a-zA-Z.]+)*){1,100}$/", $city);
+    } //End testProfileManagerCityInputWithLowerCases
+
+    public function testProfileManagerCityInputWithUpperCases()
+    {
+        $city = 'HOUSTON';
+        $this->assertMatchesRegularExpression("/^([a-zA-Z]+([\ a-zA-Z.]+)*){1,100}$/", $city);
+    } //End testProfileManagerCityInputWithUpperCases
+
+    public function testProfileManagerCityInputWithUpperCasesAndLowerCasesMixed()
+    {
+        $city = 'HoUsToN AuStIn';
+        $this->assertMatchesRegularExpression("/^([a-zA-Z]+([\ a-zA-Z.]+)*){1,100}$/", $city);
+    } //End testProfileManagerCityInputWithUpperCasesAndLowerCasesMixed
 
     public function testProfileManagerCityInputWithSpaces()
     {
@@ -155,6 +207,19 @@ class ProfileManagerInputTest extends TestCase
       $zipcode = '77055';
       $this->assertMatchesRegularExpression("/^[0-9]{5,9}$/", $zipcode);
     } //End testProfileManagerZipcodeInputOk
+
+
+    public function testProfileManagerZipcodeInputMoreThan5LessThan9Digits()
+    {
+      $zipcode = '770556';
+      $this->assertMatchesRegularExpression("/^[0-9]{5,9}$/", $zipcode);
+    } //End testProfileManagerZipcodeInputMoreThan5LessThan9Digits
+
+    public function testProfileManagerZipcodeInput9Digits()
+    {
+      $zipcode = '770553605';
+      $this->assertMatchesRegularExpression("/^[0-9]{5,9}$/", $zipcode);
+    } //End testProfileManagerZipcodeInput9Digits
 
     public function testProfileManagerZipcodeInputWithLetter()
     {

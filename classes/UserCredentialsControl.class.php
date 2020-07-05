@@ -38,25 +38,48 @@ class UserCredentialsControl extends UserCredentials
 
   public function demoUserLoginInput($demoUsername){
     $this->demoUserLogin($demoUsername);
-  }
+  } // End demoUserLoginInput
 
-  public function usersPwdUpdateInput($userId, $currentPwd, $newPwd){
-    $this->usersPwdUpdate($userId, $currentPwd, $newPwd);
-  }
+  public function usersPwdUpdateInput($userId, $currentPwd, $newPwd, $confirmNewPwd)
+  {
+    if (empty($currentPwd) || empty($newPwd) || empty($confirmNewPwd)) {
+      header("Location: ../passwordmanager.php?error=emptyfield");
+      exit();
+    }
+    elseif ($newPwd !== $confirmNewPwd) {
+      header("Location: ../passwordmanager.php?error=newpwdnotmatch");
+      exit();
+    }
+    else {
+      $this->usersPwdUpdate($userId, $currentPwd, $newPwd);
+    }
+
+  }//End usersPwdUpdateInput
 
   public function userResetPwdEmailInput($userEmail){
     if (!filter_var($userEmail, FILTER_VALIDATE_EMAIL)) { //This use to check if the email is valid
       header("Location: ../forgotpassword.php?error=invalidemail");
       exit();
     }
+    elseif (empty($userEmail)) {
+      header("Location: ../forgotpassword.php?error=emptyfield");
+      exit();
+    }
     else {
       $this->userResetPwdEmail($userEmail);
     }
+  } //End userResetPwdEmailInput
 
-  }
-
-  public function userResetPwdInput($selector, $validator, $password){
+  public function userResetPwdInput($selector, $validator, $password, $passwordRepeat)
+  {
+    if(empty($password) || empty($passwordRepeat) || empty($selector) || empty($validator)){
+      header("Location: ../create-newpwd.php?newpwd=empty");
+      exit();
+    } elseif ($password != $passwordRepeat) {
+      header("Location: ../create-newpwd.php?newpwd=pwdnotsame");
+      exit();
+    }
     $this->userResetPwd($selector, $validator, $password);
-  }
+  }//End userResetPwdInput
 
 }

@@ -2,19 +2,12 @@
 
 include 'autoloader.inc.php';
 
-$userObj = new UserCredentialsControl();
-
 if (isset($_POST['resetpwd-submit'])) {
 
   $userEmail = $_POST['email'];
+  $userObj = new UserCredentialsControl();
 
-  if (empty($userEmail)) {
-    header("Location: ../forgotpassword.php?error=emptyfield");
-    exit();
-  }
-  else {
-    $userObj->userResetPwdEmailInput($userEmail);
-  }
+  $userObj->userResetPwdEmailInput($userEmail);
 
 }
 else {
