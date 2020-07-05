@@ -2,58 +2,59 @@
 
 use PHPUnit\Framework\TestCase;
 
-class SignupInputTest extends TestCase {
+class UserCredentialsControlSignUpInputTest extends TestCase {
 
   public function testValidateUserEmailInputEmpty ()
   {
     $email = '';
-    $this->assertTrue(empty($email));
-    $this->assertTrue(empty($email2));
-  } //End testValidateUserEmailInputEmpty
+    $this->assertEmpty($email);
+    // $this->assertTrue(empty($email2));
+  } //End testValidateUserEmailInputEmptyT
 
   public function testValidateUserEmailInputNotEmpty ()
   {
     $email = 'a';
-    $this->assertTrue(empty($email));
+    $this->assertNotEmpty($email, 'Email is not empty');
   } //End testValidateUserEmailInputNotEmpty
 
   public function testValidateUsernameInputEmpty ()
   {
     $username = '';
-    $this->assertTrue(empty($username));
-    $this->assertTrue(empty($username2));
+    $this->assertEmpty($username);
+    $this->assertEmpty($username2);
   } //End testValidateUsernameInputEmpty
 
   public function testValidateUsernameInputNotEmpty ()
   {
     $username = 'abb';
-    $this->assertTrue(empty($username));
+    $this->assertNotEmpty($username, 'Username is not empty');
   } //End testValidateUsernameInputNotEmpty
 
   public function testValidateUserPasswordInputEmpty ()
   {
     $password = '';
-    $this->assertTrue(empty($password));
-    $this->assertTrue(empty($password2));
+    $this->assertEmpty($password);
+    $this->assertEmpty($password2);
   } //End testValidateUserPasswordInputEmpty
 
   public function testValidateUserPasswordInputNotEmpty ()
   {
     $password = 'aabbb';
-    $this->assertTrue(empty($password));
+    $this->assertNotEmpty($password, 'Password is not empty');
+
   } //End testValidateUserPasswordInputNotEmpty
 
   public function testValidateUserConfirmPasswordInputEmpty ()
   {
     $confirmPwd = '';
-    $this->assertTrue(empty($confirmPwd));
-    $this->assertTrue(empty($confirmPwd2));
+    $this->assertEmpty($confirmPwd);
+    $this->assertEmpty($confirmPwd2);
   } //End testValidateUserConfirmPasswordInputEmpty
 
   public function testValidateUserConfirmPasswordInputNotEmpty ()
   {
     $confirmPwd = 'aa!!';
-    $this->assertTrue(empty($confirmPwd));
+    $this->assertNotEmpty($confirmPwd, 'Confirm Password is not empty');
   } //End testValidateUserConfirmPasswordInputNotEmpty
 
 
@@ -78,6 +79,18 @@ class SignupInputTest extends TestCase {
     $email = 'testing.email!#@gmail.com';
     $this->assertEquals($email, filter_var($email, FILTER_VALIDATE_EMAIL));
   } //End testValidEmailInputWithSymbol
+
+  public function testValidEmailInputWithNumber()
+  {
+    $email = 'demotestingtest312@gmail.com';
+    $this->assertEquals($email, filter_var($email, FILTER_VALIDATE_EMAIL));
+  } // End testValidEmailInputWithNumber
+
+  public function testValidEmailInputWithNumberAndSymbol()
+  {
+    $email = 'demo_testingtest-312@gmail.com';
+    $this->assertEquals($email, filter_var($email, FILTER_VALIDATE_EMAIL));
+  } // End testValidEmailInputWithNumber
 
   public function testValidEmailInputMissingAtSymbol()
   {
@@ -104,7 +117,6 @@ class SignupInputTest extends TestCase {
   public function testValidateUsernameOk()
   {
     $username = 'demousername';
-    $incorrectUsername = 'viponline@!';
     $this->assertMatchesRegularExpression("/^[a-zA-Z0-9]*$/", $username);
   } //End testValidateUsernameOk
 
@@ -138,6 +150,12 @@ class SignupInputTest extends TestCase {
     $this->assertMatchesRegularExpression("/^[a-zA-Z0-9]*$/", $username);
   } //End testValidateUsernameWithCapitalCase
 
+  public function testValidateUsernameWithCapitalCaseWithNumber()
+  {
+    $username = '2DEMOUSER1';
+    $this->assertMatchesRegularExpression("/^[a-zA-Z0-9]*$/", $username);
+  } //End testValidateUsernameWithCapitalCase
+
   public function testValidateUsernameWithCombinationCapitalCaseAndLowerCaseAndNumber()
   {
     $username = 'DemoUser3';
@@ -147,10 +165,8 @@ class SignupInputTest extends TestCase {
   public function testPasswordMatchInput()
   {
     $password = 'pwddemo123456!';
-    $noMatchConfirmPwd = '123456';
     $matchConfirmPwd = 'pwddemo123456!';
     $this->assertEquals($password, $matchConfirmPwd);
-    // $this->assertEquals($password, $noMatchConfirmPwd);
-  }
+  }//End testPasswordMatchInput
 
 }

@@ -6,10 +6,8 @@ class FuelQuote extends Dbh
 {
 
   // added fuel fuelQuote insert & fuelQuote data retrival for clint based on clientId stored in _SESSION
-
   protected function fuelQuoteInput($quoteClientId, $quoteGallons, $quoteDeliveryDate)
   {
-
     $sql = "INSERT INTO fuelQuote (quoteClientId, quoteGallons, quoteDeliveryDate) VALUES (?, ?, ?);";
     $stmt = $this->connect()->prepare($sql);
     if (!$stmt) {
