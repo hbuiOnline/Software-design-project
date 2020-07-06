@@ -15,10 +15,12 @@ class FuelQuote extends Dbh
       exit();
     } else {
       $stmt->execute([$quoteClientId, $quoteGallons, $quoteDeliveryDate]);
-      header("Location: ../fuelquote.php?&generatequote=success");
+      header("Location: ../fuelquote.php?&placeorder=success");
       exit();
     }
     $this->connect()->null;
+
+    
   }
 
   protected function fuelQuoteData()

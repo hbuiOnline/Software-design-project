@@ -73,8 +73,24 @@ $clientData = $clientObj->getClientData();
 
               <tbody>
                 <?php
+
+                if (isset($_GET['placeorder'])) {
+                  if ($_GET['placeorder'] == "success") {
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                  Order placed! Feel free to review your order details under Your Order.
+                  </div>';
+                  }
+                }
                 $quoteObj = new FuelQuoteView();
                 echo $quoteObj->fuelQuoteDataShow();
+
+                // sets price session values back to null so that user doesn't see same quote information after Placing Order - prevents duplicate quotes
+
+                $_SESSION['ppg'] = "";
+                $_SESSION['total'] = "";
+                $_SESSION['gallons'] = "";
+                $_SESSION['deliveryDate'] = "";
+
                 ?>
               </tbody>
             </table>
@@ -83,7 +99,7 @@ $clientData = $clientObj->getClientData();
           <div class="col-lg-4">
             <form class="login120-form validate-form">
               <span class="login100-form-title">
-                Fuel Quote
+                Your Order
               </span>
               <div class="row">
                 <div class="col-sm-6">
