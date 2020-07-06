@@ -15,11 +15,13 @@ class FuelQuote extends Dbh
       exit();
     } else {
       $stmt->execute([$quoteClientId, $quoteGallons, $quoteDeliveryDate]);
-      header("Location: ../fuelquote.php?&editprofile=success&cid=" . $quoteClientId . "&gallon=" . $quoteGallons . "&quoteDeliveryDate=" . $quoteDeliveryDate);
+      header("Location: ../fuelquote.php?&placeorder=success");
       exit();
     }
     $this->connect()->null;
-  }
+
+
+  }//End of fuelQuoteInput()
 
   protected function fuelQuoteData()
   {
@@ -48,5 +50,6 @@ class FuelQuote extends Dbh
     }
 
     return $quoteData;
-  }
-}
+  }// End of fuelQuoteData()
+
+}//End of FuelQuote class
