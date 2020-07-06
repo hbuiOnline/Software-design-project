@@ -21,8 +21,10 @@ class Pricing extends Dbh
     // $formattedDeliveryDate = date("d-m-Y", strtotime($date));
 
     $_SESSION['deliveryDate'] = $deliveryDate;
-    $_SESSION['ppg'] = $currDistributorPPG + $companyMargin;
-    $_SESSION['total'] = ($currDistributorPPG + $companyMargin) * $pricingGallons;
+    $_SESSION['ppg'] = number_format((float) $currDistributorPPG + $companyMargin, 2);
+    $_SESSION['subtotal'] = number_format((float) ($currDistributorPPG + $companyMargin) * $pricingGallons, 2);
+    $_SESSION['tax'] = number_format((float) $_SESSION['subtotal'] * .0825, 2);
+    $_SESSION['total'] = number_format((float) $_SESSION['subtotal'] + $_SESSION['tax'], 2);
     header("Location: ../fuelquoteform.php?&pricing=success");
     // header("Location: ../fuelquoteform.php?&pricing=success&ppg=" . $_SESSION['ppg'] . "&total=" . $_SESSION['total'] . "&gallons=" . $_SESSION['gallons'] . "&date=" . $_SESSION['deliveryDate']);
   }

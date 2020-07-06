@@ -69,6 +69,8 @@ class UserCredentials extends Dbh
           $_SESSION['username'] = $row['userName'];
           $_SESSION['email'] = $row['userEmail'];
           $_SESSION['ppg'] = "";
+          $_SESSION['subtotal'] = "";
+          $_SESSION['tax'] = "";
           $_SESSION['total'] = "";
           $_SESSION['gallons'] = "";
           $_SESSION['deliveryDate'] = "";

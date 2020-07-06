@@ -151,6 +151,34 @@ $clientData = $clientObj->getClientData();
                     </div>
 
                     <div class="wrap-input100">
+                        <input class="input100" type="text" name="subtotal" value="<?php
+                                                                                    if ($_SESSION['subtotal'] == NULL) {
+                                                                                        echo "Subtotal";
+                                                                                    } else {
+                                                                                        echo $_SESSION['subtotal'] . " is your Subtotal";
+                                                                                    }
+                                                                                    ?>" readonly>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-usd" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100">
+                        <input class="input100" type="text" name="taxes" value="<?php
+                                                                                if ($_SESSION['tax'] == NULL) {
+                                                                                    echo "Tax (8.25%)";
+                                                                                } else {
+                                                                                    echo $_SESSION['tax'] . " is your Tax Amount";
+                                                                                }
+                                                                                ?>" readonly>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-usd" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100">
                         <input class="input100" type="text" name="price" value="<?php
                                                                                 if ($_SESSION['total'] == NULL) {
                                                                                     echo 'Total Price';
