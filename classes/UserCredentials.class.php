@@ -68,6 +68,12 @@ class UserCredentials extends Dbh
           $_SESSION['id'] = $row['userId'];
           $_SESSION['username'] = $row['userName'];
           $_SESSION['email'] = $row['userEmail'];
+          $_SESSION['ppg'] = "";
+          $_SESSION['subtotal'] = "";
+          $_SESSION['tax'] = "";
+          $_SESSION['total'] = "";
+          $_SESSION['gallons'] = "";
+          $_SESSION['deliveryDate'] = "";
 
           $sql = "SELECT * FROM clientProfile WHERE clientUserId = ?;";
           $stmt = $this->connect()->prepare($sql);

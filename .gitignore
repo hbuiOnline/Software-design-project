@@ -1,8 +1,8 @@
-node_modules/
-
-# MacOS file
-.DS_Store
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
 
 phpunit.xml
-
-/vendor/bin/phpunit
+vendor\bin\phpunit
