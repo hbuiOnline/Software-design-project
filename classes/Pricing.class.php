@@ -5,30 +5,42 @@ session_start();
 class Pricing extends Dbh
 {
 
-  protected function pricingInput($locationFactor, $rateHistoryFactor, $gallonsReqFactor, $pricingGallons, $deliveryDate)
+  protected function pricingInput($pricingClientId, $pricingGallons, $pricingState, $deliveryDate)
   {
+
+    $locationFactor = ($pricingState == "TX") ? .02 : .04; // Taxes
+
+    $sql = "SELECT * FROM fuelQuote WHERE quoteClientId = ?;";
+    $stmt = $this->connect()->prepare($sql);
+    if (!$stmt) {
+      header("Location: ../fuelquoteform.php?error=sqlError");
+      exit();
+    } else {
+      $stmt->execute([$pricingClientId]);
+      $hasQuoteAlready = $stmt->fetchColumn();
+
+      $rateHistoryFactor = ($hasQuoteAlready) ? .01 : 0;
+
+      $this->connect()->null;
+    }
+
+    $gallonsReqFactor = ($pricingGallons > 1000) ? .02 : .03;
 
     $companyProfitFactor = .10;
     $currDistributorPPG = 1.50;
-
     $companyMargin = ($locationFactor - $rateHistoryFactor + $gallonsReqFactor + $companyProfitFactor) * $currDistributorPPG;
 
+
     $_SESSION['gallons'] = $pricingGallons;
-
-    // trying to convert format YYYY-MM-DD to MM/DD/YYY - ! doesn't work !
-    // $date = str_replace('-"', '/', (string) $deliveryDate);
-    // $formattedDeliveryDate = date("d-m-Y", strtotime($date));
-
-    //Model to calculate the quote/place order
     $_SESSION['deliveryDate'] = $deliveryDate;
-    $_SESSION['ppg'] = number_format((float) $currDistributorPPG + $companyMargin, 2);
-    $_SESSION['subtotal'] = number_format((float) ($currDistributorPPG + $companyMargin) * $pricingGallons, 2);
-    $_SESSION['tax'] = number_format((float) $_SESSION['subtotal'] * .0825, 2);
-    $_SESSION['total'] = number_format((float) $_SESSION['subtotal'] + $_SESSION['tax'], 2);
-
-    //Need to push some of these into the database to save a the quoteHistory
+    $_SESSION['ppg'] = number_format((float) $currDistributorPPG + $companyMargin, 3);
+    $_SESSION['total'] = (string)number_format((float) ($currDistributorPPG + $companyMargin) * $pricingGallons, 2);
 
     header("Location: ../fuelquoteform.php?&pricing=success");
-    // header("Location: ../fuelquoteform.php?&pricing=success&ppg=" . $_SESSION['ppg'] . "&total=" . $_SESSION['total'] . "&gallons=" . $_SESSION['gallons'] . "&date=" . $_SESSION['deliveryDate']);
-  }
+    exit();
+
+
+  }//End of pricingInput()
+
+
 }

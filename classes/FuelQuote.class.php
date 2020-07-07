@@ -5,16 +5,16 @@
 class FuelQuote extends Dbh
 {
 
-  // added fuel fuelQuote insert & fuelQuote data retrival for clint based on clientId stored in _SESSION
-  protected function fuelQuoteInput($quoteClientId, $quoteGallons, $quoteDeliveryDate)
+  // added fuel fuelQuote insert & fuelQuote data retrival for client based on clientId stored in _SESSION
+  protected function fuelQuoteInput($quoteClientId, $quoteGallons, $quotePPG, $quoteTotal, $quoteDeliveryDate)
   {
-    $sql = "INSERT INTO fuelQuote (quoteClientId, quoteGallons, quoteDeliveryDate) VALUES (?, ?, ?);";
+    $sql = "INSERT INTO fuelQuote (quoteClientId, quoteGallons, quoteTotal, quotePPG, quoteDeliveryDate) VALUES (?, ?, ?, ?, ?);";
     $stmt = $this->connect()->prepare($sql);
     if (!$stmt) {
       header("Location: ../fuelquoteform.php?error=sqlerror");
       exit();
     } else {
-      $stmt->execute([$quoteClientId, $quoteGallons, $quoteDeliveryDate]);
+      $stmt->execute([$quoteClientId, $quoteGallons, $quoteTotal, $quotePPG, $quoteDeliveryDate]);
       header("Location: ../fuelquote.php?&placeorder=success");
       exit();
     }
@@ -43,8 +43,8 @@ class FuelQuote extends Dbh
           <td>" . $row['quoteId'] . "</td>"
           . "<td>" . $row['quoteDeliveryDateFormatted'] . "</td>"
           . "<td>" . $row['quoteGallons'] . "</td>"
-          . "<td>" . $row['quotePPG'] . "</td>"
-          . "<td>" . $row['quoteTotal'] . "</td>
+          . "<td>$" . $row['quotePPG'] . "</td>"
+          . "<td>$" . $row['quoteTotal'] . "</td>
         </tr>";
       }
     }

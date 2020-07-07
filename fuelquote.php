@@ -65,7 +65,7 @@ $clientData = $clientObj->getClientData();
                   <th>ID</th>
                   <th>Delivery Date</th>
                   <th>Gallon(s)</th>
-                  <th>Quote</th>
+                  <th>PPG</th>
                   <th>Total</th>
                 </tr>
               </thead>
@@ -78,21 +78,12 @@ $clientData = $clientObj->getClientData();
                 if (isset($_GET['placeorder'])) {
                   if ($_GET['placeorder'] == "success") {
                     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                  Order placed! Feel free to review your order details under Your Order.
-                  </div>';
+                    Order placed! Feel free to review your order details under Your Order.
+                    </div>';
                   }
                 }
                 $quoteObj = new FuelQuoteView();
                 echo $quoteObj->fuelQuoteDataShow();
-
-                // sets price session values back to null so that user doesn't see same quote information after Placing Order - prevents duplicate quotes
-
-                $_SESSION['ppg'] = "";
-                $_SESSION['subtotal'] = "";
-                $_SESSION['tax'] = "";
-                $_SESSION['total'] = "";
-                $_SESSION['gallons'] = "";
-                $_SESSION['deliveryDate'] = "";
 
                 ?>
               </tbody>
@@ -105,35 +96,34 @@ $clientData = $clientObj->getClientData();
                 Your Order
               </span>
               <div class="row">
-                <div class="col-sm-6">
-                  <h6>Suggested Price / Gallon:</h6>
-                  <p>$1.79 / gallon</p>
-                  <br>
+                <div class="col-lg-12">
+                  <p class="info-topic">Delivery Date:</p>
+                  <p class="info-data">
+                    <?php
+                    $date = date_create($_SESSION['deliveryDate']);
+                    echo date_format($date,"m/d/Y");
+                    ?>
+                  </p>
+                  <hr>
                 </div>
-                <div class="col-sm-6">
-                  <h6>Number of Gallon(s):</h6>
-                  <p>1000 gallon(s)</p>
-                  <br>
-                </div>
-
               </div>
-
               <div class="row">
-                <div class="col-sm-6">
-                  <h6>Subtotal:</h6>
-                  <p>$1,790</p>
-                  <br>
+                <div class="col-lg-12">
+                  <p class="info-topic">Suggested Price / Gallon:</p>
+                  <p class="info-data">$<?php echo $_SESSION['ppg']; ?> / gallon</p>
+                  <hr>
                 </div>
-                <div class="col-sm-6">
-                  <h6>Taxes(8.25%):</h6>
-                  <p>$147.68</p>
-                  <br>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                    <p class="info-topic">Number of Gallon(s):</p>
+                    <p class="info-data"><?php echo $_SESSION['gallons']; ?> gallon(s)</p>
+                    <hr>
                 </div>
-
               </div>
 
               <h6>Total Amount Due:</h6>
-              <h4>$1,937.68 </h4>
+              <h4>$<?php echo $_SESSION['total']; ?></h4>
 
               <div class="container-login100-form-btn">
                 <a class="login100-form-btn" href="fuelquoteform.php" role="button">
@@ -149,6 +139,16 @@ $clientData = $clientObj->getClientData();
 
     </div>
   </div>
+
+  <?php
+  // sets price session values back to null so that user doesn't see same quote information after Placing Order - prevents duplicate quotes
+
+  $_SESSION['ppg'] = "";
+  $_SESSION['total'] = "";
+  $_SESSION['gallons'] = "";
+  $_SESSION['deliveryDate'] = "";
+
+  ?>
 
 
 
@@ -169,7 +169,7 @@ $clientData = $clientObj->getClientData();
     // Call the dataTables jQuery plugin
     $(document).ready(function() {
       $('table.display').DataTable({
-        "lengthMenu": [[1,5,10, 25, 50, -1], [1,5,10, 25, 50, "All"]]
+        "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]]
       });
     });
   </script>
