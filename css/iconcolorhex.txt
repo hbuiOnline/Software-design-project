@@ -1,0 +1,8 @@
+Button color: #5cb85c
+
+Background: #9053c7 --> #b85c5c
+
+Gradient first: #c850c0 --> #b88a5c
+
+Gradient second: #4158d0 --> #b85cb8
+
