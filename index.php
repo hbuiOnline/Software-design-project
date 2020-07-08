@@ -20,7 +20,8 @@
 	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/main2.css">
+
 	<!--===============================================================================================-->
 </head>
 
@@ -116,12 +117,13 @@
 					</div> -->
 				</form>
 
-				<form class="login100-form" action="includes/login.inc.php" method="POST">
+				<!-- No need the Demo For now -->
+				<!-- <form class="login100-form" action="includes/login.inc.php" method="POST">
 					<input type="hidden" name="demousername" value="demoUser">
 					<button class="login100-form-btn" type="submit" name="demo-login">
 						Demo User
 					</button>
-				</form>
+				</form> -->
 
 
 			</div>
