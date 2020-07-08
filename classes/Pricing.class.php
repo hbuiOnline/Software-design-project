@@ -30,7 +30,6 @@ class Pricing extends Dbh
     $currDistributorPPG = 1.50;
     $companyMargin = ($locationFactor - $rateHistoryFactor + $gallonsReqFactor + $companyProfitFactor) * $currDistributorPPG;
 
-
     $_SESSION['gallons'] = $pricingGallons;
     $_SESSION['deliveryDate'] = $deliveryDate;
     $_SESSION['ppg'] = number_format((float) $currDistributorPPG + $companyMargin, 3);
