@@ -9,7 +9,6 @@ if (isset($_POST['quote-input'])) {
   $quoteGallons = $_POST['quoteGallons'];
   $quotePPG = $_POST['quotePPG'];
   $quoteTotal = $_POST['quoteTotal'];
-  echo $quoteTotal ."\n";
   $quoteState = $_POST['state'];
   $quoteDeliveryDate = $_POST['quoteDeliveryDate'];
 
