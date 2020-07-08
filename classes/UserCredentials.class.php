@@ -65,9 +65,11 @@ class UserCredentials extends Dbh
         } elseif ($pwdCheck == true) {
           session_start();
 
+
           $_SESSION['id'] = $row['userId'];
           $_SESSION['username'] = $row['userName'];
           $_SESSION['email'] = $row['userEmail'];
+          //initialize the quote into the $_SESSION
           $_SESSION['ppg'] = "";
           $_SESSION['subtotal'] = "";
           $_SESSION['tax'] = "";

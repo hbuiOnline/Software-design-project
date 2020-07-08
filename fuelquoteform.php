@@ -14,7 +14,7 @@ $clientData = $clientObj->getClientData();
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- For overriding small elements -->
-    <link rel="stylesheet" type="text/css" href="css/override.css">
+    <link rel="stylesheet" type="text/css" href="css/override2.css">
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="images/LogoNoBackground.png" />
     <!--===============================================================================================-->
@@ -64,22 +64,16 @@ $clientData = $clientObj->getClientData();
                     if (isset($_GET['error'])) { //when we have something equal to something in URL, use _GET method
                         if ($_GET['error'] == "emptypricefield") {
                             echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-							Please fill in all fields before Generating Quote.
-						  </div>';
+              							Please fill in all fields before Generating Quote.
+              						  </div>';
                         } elseif ($_GET['error'] == 'nogeneratequote') {
                             echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-							Please Generate a Quote before Placing an Order.
-						  </div>';
+                  							Please Generate a Quote before Placing an Order.
+                  						  </div>';
                         } elseif ($_GET['error'] == 'invalidgallons') {
                             echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-							Please enter a number for gallons.
-						  </div>';
-                        }
-                    } elseif (isset($_GET['pricing'])) {
-                        if ($_GET['pricing'] == "success") {
-                            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-							Quote generated!
-						  </div>';
+                							Please enter a number for gallons.
+                						  </div>';
                         }
                     }
                     ?>
@@ -106,16 +100,14 @@ $clientData = $clientObj->getClientData();
 
                     <input type="hidden" name="quoteGallons" value="<?php echo $_SESSION['gallons']; ?>">
 
+                    <input type="hidden" name="quotePPG" value="<?php echo $_SESSION['ppg']; ?>">
+
+                    <input type="hidden" name="quoteTotal" value="<?php echo $_SESSION['total']; ?>">
+
                     <input type="hidden" name="quoteDeliveryDate" value="<?php echo $_SESSION['deliveryDate']; ?>">
 
                     <div class="wrap-input100" data-validate="Gallons requested">
-                        <input class="input100" type="number" name="gallons" placeholder="<?php
-                                                                                            if ($_SESSION['gallons'] == NULL) {
-                                                                                                echo "Gallons Requested";
-                                                                                            } else {
-                                                                                                echo $_SESSION['gallons'] . " gallons requested for ...";
-                                                                                            }
-                                                                                            ?>">
+                        <input class="input100" type="number" name="gallons" placeholder="Number of Gallons">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-industry" aria-hidden="true"></i>
@@ -123,75 +115,12 @@ $clientData = $clientObj->getClientData();
                     </div>
 
                     <div class="wrap-input100">
-                        <input class="input100" type="text" name="deliveryDate" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="<?php
-                                                                                                                                                        if ($_SESSION['deliveryDate'] == NULL) {
-                                                                                                                                                            echo "Delivery Date";
-                                                                                                                                                        } else {
-                                                                                                                                                            echo "Delivery on " . $_SESSION['deliveryDate'];
-                                                                                                                                                        }
-                                                                                                                                                        ?>">
+                        <input class="input100" type="text" name="deliveryDate" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Delivery Date">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                         </span>
                     </div>
-
-                    <div class="wrap-input100">
-                        <input class="input100" type="text" name="ppg" value="<?php
-                                                                                if ($_SESSION['ppg'] == NULL) {
-                                                                                    echo "Price Per Gallon";
-                                                                                } else {
-                                                                                    echo $_SESSION['ppg'] . " per Gallon";
-                                                                                }
-                                                                                ?>" readonly>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-usd" aria-hidden="true"></i>
-                        </span>
-                    </div>
-
-                    <div class="wrap-input100">
-                        <input class="input100" type="text" name="subtotal" value="<?php
-                                                                                    if ($_SESSION['subtotal'] == NULL) {
-                                                                                        echo "Subtotal";
-                                                                                    } else {
-                                                                                        echo $_SESSION['subtotal'] . " is your Subtotal";
-                                                                                    }
-                                                                                    ?>" readonly>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-usd" aria-hidden="true"></i>
-                        </span>
-                    </div>
-
-                    <div class="wrap-input100">
-                        <input class="input100" type="text" name="taxes" value="<?php
-                                                                                if ($_SESSION['tax'] == NULL) {
-                                                                                    echo "Tax (8.25%)";
-                                                                                } else {
-                                                                                    echo $_SESSION['tax'] . " is your Tax Amount";
-                                                                                }
-                                                                                ?>" readonly>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-usd" aria-hidden="true"></i>
-                        </span>
-                    </div>
-
-                    <div class="wrap-input100">
-                        <input class="input100" type="text" name="price" value="<?php
-                                                                                if ($_SESSION['total'] == NULL) {
-                                                                                    echo 'Total Price';
-                                                                                } else {
-                                                                                    echo $_SESSION['total'] . " is your Total";
-                                                                                }
-                                                                                ?>" readonly>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-usd" aria-hidden="true"></i>
-                        </span>
-                    </div>
-
 
                     <div class="container-login100-form-btn">
                         <button type="submit" name="pricing-input" onClick="submitForm('includes/getprice.inc.php')" class="login100-form-btn" method="POST">
@@ -199,11 +128,61 @@ $clientData = $clientObj->getClientData();
                         </button>
                     </div>
 
-                    <div class="container-login100-form-btn">
-                        <button type="submit" name="quote-input" onClick="submitForm('includes/fuelquote.inc.php')" class="login100-form-btn" method="POST">
-                            Place Order
-                        </button>
-                    </div>
+                    <?php
+                    if (isset($_GET['pricing'])) {
+                        if ($_GET['pricing'] == "success") {
+                    ?>
+                      <hr>
+                      <br><br>
+                      <span class="login100-form-title">
+                        Your Quote
+                      </span>
+                      <?php echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Quote generated!
+                        </div>';
+                      ?>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <p class="info-topic">Delivery Date:</p>
+                          <p class="info-data">
+                            <?php
+                            $date = date_create($_SESSION['deliveryDate']);
+                            echo date_format($date,"m/d/Y");
+                            ?>
+                          </p>
+                          <hr>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <p class="info-topic">Suggested Price / Gallon:</p>
+                          <p class="info-data">$<?php echo $_SESSION['ppg']; ?> / gallon</p>
+                          <hr>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12">
+                            <p class="info-topic">Number of Gallon(s):</p>
+                            <p class="info-data"><?php echo $_SESSION['gallons']; ?> gallon(s)</p>
+                            <hr>
+                        </div>
+                      </div>
+
+
+                      <h6>Total Amount Due:</h6>
+                      <h4>$<?php echo $_SESSION['total']; ?></h4>
+
+                      <div class="container-login100-form-btn">
+                          <button type="submit" name="quote-input" onClick="submitForm('includes/fuelquote.inc.php')" class="login100-form-btn" method="POST">
+                              Place Order
+                          </button>
+                      </div>
+
+                    <?php
+                          }
+                      }
+
+                     ?>
 
 
             </div>

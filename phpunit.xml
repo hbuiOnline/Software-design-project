@@ -15,17 +15,9 @@
 
   <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">C:\xampp\htdocs\Software-Design\Software-design-project\tests</directory>
+            <directory suffix=".php">/Applications/XAMPP/xamppfiles/htdocs/COSC4353Project/tests</directory>
         </whitelist>
   </filter>
 
-<logging>
-    <log lowUpperBound="35" highLowerBound="70" showUncoveredFiles="true" />
-    <log type="coverage-html" target="C:\xampp\htdocs\Software-Design\Software-design-project\tests\coverage" showUncoveredFiles="true"/>
-</logging>
 
 </phpunit>
-
-
-
-
