@@ -35,7 +35,7 @@ class FuelQuoteControlTest extends TestCase
   {
     $quoteState = 'TX';
     $this->assertNotEmpty($quoteState, 'Email is not empty');
-  } //End testEmailInputNotEmpty
+  } //End testFuelQuoteStateInputNotEmpty()
 
   public function testFuelQuoteDeliverDateInputEmpty()
   {
@@ -50,6 +50,12 @@ class FuelQuoteControlTest extends TestCase
     $this->assertNotEmpty($quoteDeliveryDate, 'Email is not empty');
   } //End testFuelQuoteDeliverDateInputNotEmpty
 
+  public function testFuelQuoteDeliveryDateInputIsInstanceOfDateTime()
+  {
+    $date = new DateTime('2021-12-10');
+    $this->assertInstanceOf(DateTime::class, $date);
+  }// End testFuelQuoteDeliveryDateInputIsInstanceOfDate()
+
   public function testFuelQuoteGallonInputOk()
   {
     $quoteGallons = 12000;
@@ -60,13 +66,13 @@ class FuelQuoteControlTest extends TestCase
   {
     $quoteGallons = 1;
     $this->assertMatchesRegularExpression("/^[0-9]*$/", $quoteGallons);
-  }// End testFuelQuoteGallonInputOk
+  }// End testFuelQuoteGallonInputSmall()
 
   public function testFuelQuoteGallonInputLarge()
   {
     $quoteGallons = 10000200000300000;
     $this->assertMatchesRegularExpression("/^[0-9]*$/", $quoteGallons);
-  }// End testFuelQuoteGallonInputOk
+  }// End testFuelQuoteGallonInputLarge()
 
   public function testFuelQuoteStateInputOk()
   {

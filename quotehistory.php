@@ -62,7 +62,7 @@ $clientData = $clientObj->getClientData();
               <th>ID</th>
               <th>Delivery Date</th>
               <th>Gallon(s)</th>
-              <th>Quote</th>
+              <th>Price/Gallon</th>
               <th>Total</th>
             </tr>
           </thead>
@@ -71,11 +71,8 @@ $clientData = $clientObj->getClientData();
 
           <tbody>
             <?php
-
-
-            $quoteObj = new FuelQuoteView();
-            echo $quoteObj->fuelQuoteDataShow();
-
+              $quoteObj = new FuelQuoteView();
+              echo $quoteObj->fuelQuoteDataShow();
             ?>
           </tbody>
         </table>

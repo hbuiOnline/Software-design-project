@@ -8,12 +8,14 @@ class UserCredentialsControlUserResetPasswordInputTest extends TestCase
   {
     $selector = '';
     $this->assertTrue(empty($selector));
+    $this->assertEmpty($selector);
   }//End testUserResetPasswordSelectorEmpty
 
   public function testUserResetPasswordValidatorEmpty()
   {
     $validator = '';
     $this->assertTrue(empty($validator));
+    $this->assertEmpty($validator);
   }//End testUserResetPasswordValidatorEmpty
 
   public function testUserResetPasswordInputEmpty()
