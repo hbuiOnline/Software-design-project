@@ -25,6 +25,12 @@ class UserCredentialsControlPasswordUpdateInputTest extends TestCase
     $this->assertTrue(empty($newPassword1));
   } //End newPasswordUpdateInputTestEmpty
 
+  public function testNewPasswordUpdateInputWithSpace()
+  {
+    $newPassword = 'abbbaa   222315';
+    $this->assertStringContainsString(' ', $newPassword);
+  } //End testNewPasswordUpdateInputWithSpace
+
   public function testNewPasswordUpdateInputTestNotEmpty ()
   {
     $newPassword = 'bbbaa222315';
