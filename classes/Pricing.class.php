@@ -32,14 +32,14 @@ class Pricing extends Dbh
 
     $_SESSION['gallons'] = $pricingGallons;
     $_SESSION['deliveryDate'] = $deliveryDate;
-    $_SESSION['ppg'] = number_format((float) $currDistributorPPG + $companyMargin, 3);
+
+    // changed precision to 2 for ppg
+    $_SESSION['ppg'] = number_format((float) $currDistributorPPG + $companyMargin, 2);
     $_SESSION['total'] = (string)number_format((float) ($currDistributorPPG + $companyMargin) * $pricingGallons, 2);
 
     header("Location: ../fuelquoteform.php?&pricing=success");
     exit();
-
-
-  }//End of pricingInput()
+  } //End of pricingInput()
 
 
 }
