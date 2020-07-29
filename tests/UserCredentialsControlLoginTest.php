@@ -7,6 +7,7 @@ class UserCredentialsControlLoginTest extends TestCase {
   public function testLoginUsernameInputEmpty()
   {
     $this->assertTrue(empty($username));
+    $this->assertEmpty($username);
   } //End testLoginUsernameInputEmpty
 
   public function testLoginUsernameInputNotEmpty ()
@@ -18,6 +19,7 @@ class UserCredentialsControlLoginTest extends TestCase {
   public function testLoginUserPasswordInputEmpty()
   {
     $this->assertTrue(empty($password));
+    $this->assertEmpty($password);
   } //End testLoginUserPasswordInputEmpty
 
   public function testLoginUserPasswordInputNotEmpty ()

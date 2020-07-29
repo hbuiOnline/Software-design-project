@@ -233,6 +233,18 @@ class ClientProfileControlTest extends TestCase
       $this->assertMatchesRegularExpression("/^[0-9]{5,9}$/", $zipcode);
     } //End testProfileManagerZipcodeInputWithLongInput
 
+    public function testProfileManagerZipcodeInputIsString()
+    {
+      $zipcode = '1234567';
+      $this->assertIsString($zipcode);
+    } // End testProfileManagerZipcodeInputIsString()
+
+    public function testProfileManagerZipcodeInputIsInt()
+    {
+      $zipcode = 23456;
+      $this->assertIsInt($zipcode);
+    } // End testProfileManagerZipcodeInputIsInt()
+
 
 
 

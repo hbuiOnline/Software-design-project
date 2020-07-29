@@ -1,9 +1,5 @@
-_site
-.sass-cache
-.jekyll-cache
-.jekyll-metadata
-vendor
 
 phpunit.xml
 vendor\bin\phpunit
 software-design-project.zip
+.gitignore

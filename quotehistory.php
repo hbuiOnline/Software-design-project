@@ -68,7 +68,7 @@ $clientData = $clientObj->getClientData();
               <th>ID</th>
               <th>Delivery Date</th>
               <th>Gallon(s)</th>
-              <th>Quote</th>
+              <th>Price/Gallon</th>
               <th>Total</th>
             </tr>
           </thead>
