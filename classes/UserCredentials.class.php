@@ -179,7 +179,7 @@ class UserCredentials extends Dbh
     //This will give the user a limited time to use for securing purpose.
     $expires = date("U") + 1800; //This is one hour from the time submit the request.
 
-    $url = "https://cosc4353fuelquoter.herokuapp.com/create-newpwd.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "http://fuelquoter-env.eba-yzi9e36b.us-east-2.elasticbeanstalk.com/create-newpwd.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $sql = "DELETE FROM pwdReset WHERE pwdResetEmail = ?;";
     $stmt = $this->connect()->prepare($sql);
