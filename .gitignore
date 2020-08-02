@@ -1,2 +1,5 @@
 
 phpunit.xml
+vendor\bin\phpunit
+software-design-project.zip
+.gitignore

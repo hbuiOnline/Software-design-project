@@ -47,7 +47,13 @@ $clientData = $clientObj->getClientData();
 
     <?php
     include 'navbar.php';
+
+
+
+
+
     ?>
+
 
     <div class="limiter">
 
@@ -71,8 +77,21 @@ $clientData = $clientObj->getClientData();
 
           <tbody>
             <?php
-              $quoteObj = new FuelQuoteView();
+
+            //added error message that displays if client hasn't completed their profile / generated a quote
+
+            $quoteObj = new FuelQuoteView();
+            if ($clientData == NULL) {
+              echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                You must complete your profile and generate a fuel quote before you can obtain a Fuel Quote History.
+                                </div>';
+            } else {
               echo $quoteObj->fuelQuoteDataShow();
+            }
+
+
+
+
             ?>
           </tbody>
         </table>
