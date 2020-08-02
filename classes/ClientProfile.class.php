@@ -16,8 +16,14 @@ class clientProfile extends Dbh
       exit();
     } else {
       $stmt->execute([$clientUserId]);
-      $resultCheck = $stmt->fetchColumn();
 
+      //setting session variable
+
+      // if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      //   $_SESSION['client'] = $row['clientId'];
+      // }
+
+      $resultCheck = $stmt->fetchColumn();
       if ($resultCheck == true) {
         $sql = "UPDATE clientProfile SET clientName = ?, clientAddress1 = ?, clientAddress2 = ?, clientCity = ?, clientState = ?, clientZip = ? WHERE clientUserId = ?";
         $stmt = $this->connect()->prepare($sql);
@@ -26,6 +32,22 @@ class clientProfile extends Dbh
           exit();
         } else {
           $stmt->execute([$clientName, $clientAddress1, $clientAddress2, $clientCity, $clientState, $clientZip, $clientUserId]);
+
+          //setting client session variable
+          $sql = "SELECT * FROM clientProfile WHERE clientUserId = ?;";
+          $stmt = $this->connect()->prepare($sql);
+
+          if (!$stmt) {
+            header("Location: ../profilemanager.php?error=sqlError");
+            exit();
+          } else {
+            $stmt->execute([$_SESSION['id']]);
+
+            if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+              $_SESSION['client'] = $row['clientId'];              
+            }
+          }
+
           header("Location: ../profilemanager.php?clientUserId=" . $clientUserId . "&editprofile=success");
           exit();
         }
@@ -38,6 +60,22 @@ class clientProfile extends Dbh
           exit();
         } else {
           $stmt->execute([$clientUserId, $clientName, $clientAddress1, $clientAddress2, $clientCity, $clientState, $clientZip]);
+
+          //setting client session variable
+          $sql = "SELECT * FROM clientProfile WHERE clientUserId = ?;";
+          $stmt = $this->connect()->prepare($sql);
+
+          if (!$stmt) {
+            header("Location: ../profilemanager.php?error=sqlError");
+            exit();
+          } else {
+            $stmt->execute([$_SESSION['id']]);
+
+            if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+              $_SESSION['client'] = $row['clientId'];              
+            }
+          }
+
           header("Location: ../profilemanager.php?&editprofile=success");
           exit();
         }
